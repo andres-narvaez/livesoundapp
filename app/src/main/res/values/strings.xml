@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">livesound</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="close_text">X</string>
+    <string name="menu_player">menu_player</string>
+    <string name="menu_playlist">menu_playlist</string>
+    <string name="menu_profile">menu_profile</string>
+</resources>
