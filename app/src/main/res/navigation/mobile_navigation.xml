@@ -14,8 +14,15 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.livesound.ui.profile.ProfileFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_profile" />
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_playerFragment"
+            app:destination="@id/nav_player" />
+        <action
+            android:id="@+id/action_profileFragment_to_playListFragment"
+            app:destination="@id/nav_playlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_player"
