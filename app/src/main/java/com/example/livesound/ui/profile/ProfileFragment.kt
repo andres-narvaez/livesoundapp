@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.livesound.R
 import com.example.livesound.databinding.FragmentProfileBinding
@@ -58,6 +58,7 @@ class ProfileFragment : Fragment() {
         val adapterSongs = SongAdapter(songList) { song ->
             // Manejar la acción de reproducción aquí
             println(song)
+            findNavController().navigate(R.id.action_profileFragment_to_playerFragment)
         }
 
         binding.recyclerViewSongs.layoutManager = LinearLayoutManager(context)
@@ -88,6 +89,7 @@ class ProfileFragment : Fragment() {
         val adapterPlaylist = PlaylistAdapter(playList) { playlist ->
             // Manejar la acción de reproducción aquí
             println(playlist)
+            findNavController().navigate(R.id.action_profileFragment_to_playListFragment)
         }
 
         binding.recyclerViewPlaylistItems.layoutManager = LinearLayoutManager(context)

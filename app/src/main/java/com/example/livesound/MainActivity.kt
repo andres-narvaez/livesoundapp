@@ -38,24 +38,41 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val headerView = navView.getHeaderView(0)
         val closeButton = headerView.findViewById<FloatingActionButton>(R.id.close_main_menu)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        val homeMenuItem = navView.menu.findItem(R.id.nav_home)
+        val profileMenuItem = navView.menu.findItem(R.id.nav_profile)
+        val playerMenuItem = navView.menu.findItem(R.id.nav_player)
+        val playListMenuItem = navView.menu.findItem(R.id.nav_playlist)
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_profile, R.id.nav_player, R.id.nav_playlist
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
         closeButton.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
-    }
+        homeMenuItem.setOnMenuItemClickListener {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_home)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+        profileMenuItem.setOnMenuItemClickListener {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_profile)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+        playerMenuItem.setOnMenuItemClickListener {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_player)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+        playListMenuItem.setOnMenuItemClickListener {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_playlist)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
