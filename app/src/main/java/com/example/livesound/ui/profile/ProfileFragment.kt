@@ -1,5 +1,6 @@
 package com.example.livesound.ui.profile
 
+import VideoDialogFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -75,6 +76,8 @@ class ProfileFragment : Fragment() {
         val adapterVideo = VideoAdapter(videoList) { video ->
             // Manejar la acción de reproducción aquí
             println(video)
+            val videoDialog = VideoDialogFragment()
+            videoDialog.show(parentFragmentManager, "videoDialog")
         }
 
         binding.recyclerViewVideos.layoutManager = LinearLayoutManager(context)
