@@ -92,4 +92,118 @@
             android:src="@drawable/next" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/platformText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Escucha en"
+        android:textSize="20sp"
+        android:textAlignment="viewStart"
+        android:gravity="start"
+        android:textColor="@color/font_light"
+        app:layout_constraintTop_toBottomOf="@+id/musicControls"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Contenedor para los logos -->
+    <LinearLayout
+        android:id="@+id/music_platforms_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/musicControls"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botones con logos de plataformas -->
+        <ImageButton
+            android:id="@+id/btn_apple_music"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Apple Music"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_apple" />
+
+        <ImageButton
+            android:id="@+id/btn_spotify"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Spotify"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_spotify" />
+
+        <ImageButton
+            android:id="@+id/btn_prime_music"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Prime Music"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_prime" />
+
+        <ImageButton
+            android:id="@+id/btn_deezer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Deezer"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_deezer" />
+
+        <ImageButton
+            android:id="@+id/btn_soundcloud"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="SoundCloud"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_soundcloud" />
+
+    </LinearLayout>
+
+    <!-- Contenedor del WebView que inicialmente está oculto -->
+    <FrameLayout
+        android:id="@+id/webview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#80000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- WebView para cargar las URLs -->
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_close_webview" />
+
+        <!-- Botón para cerrar el WebView -->
+        <Button
+            android:id="@+id/btn_close_webview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar"
+            android:layout_gravity="top|end"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/webView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </FrameLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

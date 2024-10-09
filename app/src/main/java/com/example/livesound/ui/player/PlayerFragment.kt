@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.livesound.R
 import com.example.livesound.databinding.FragmentPlayerBinding
+import kotlin.math.min
+import kotlin.math.max
 
 class PlayerFragment : Fragment() {
 
@@ -19,6 +23,7 @@ class PlayerFragment : Fragment() {
 
     private lateinit var mediaPlayer: MediaPlayer
     private var isPlaying = false
+    private var isSeekBarUpdating = false // Variable para controlar si la seekBar está actualizándose
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,11 +37,8 @@ class PlayerFragment : Fragment() {
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.song) // Reemplazar con tu canción
 
         // Mostrar el título de la canción
-        val textView: TextView = binding.songTitle
-        textView.text = "Bad Guy"
-
-        val textViewArtist: TextView = binding.artistName
-        textViewArtist.text = "Billie Eilish"
+        binding.songTitle.text = "Bad Guy"
+        binding.artistName.text = "Billie Eilish"
 
         // Botón de Play/Pausa
         binding.buttonPlayPause.setOnClickListener {
@@ -51,24 +53,15 @@ class PlayerFragment : Fragment() {
         }
 
         // Controlar la barra de progreso
-        binding.seekBar.max = mediaPlayer.duration
-        mediaPlayer.setOnBufferingUpdateListener { _, percent ->
-            binding.seekBar.secondaryProgress = percent
-        }
-
         mediaPlayer.setOnPreparedListener {
             binding.seekBar.max = it.duration
+            isSeekBarUpdating = true // Inicia la actualización de la SeekBar
             binding.seekBar.postDelayed(updateSeekBar, 1000)
         }
 
         // Agregar funcionalidad para avanzar y retroceder
-        binding.buttonForward.setOnClickListener {
-            fastForward()
-        }
-
-        binding.buttonRewind.setOnClickListener {
-            rewind()
-        }
+        binding.buttonForward.setOnClickListener { fastForward() }
+        binding.buttonRewind.setOnClickListener { rewind() }
 
         // Listener para la SeekBar
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -82,25 +75,65 @@ class PlayerFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
+        val webView = binding.webView
+        webView.webViewClient = WebViewClient()
+        webView.settings.javaScriptEnabled = true
+
+        // Inicialmente el WebView está oculto
+        binding.webviewContainer.visibility = View.GONE
+
+        // Botón de Cerrar WebView
+        binding.btnCloseWebview.setOnClickListener {
+            binding.webviewContainer.visibility = View.GONE // Oculta el WebView
+        }
+
+        // Agregar eventos a los botones
+        binding.btnAppleMusic.setOnClickListener {
+            openWebPage(webView, "https://music.apple.com/es/artist/billie-eilish/1065981054")
+        }
+
+        binding.btnSpotify.setOnClickListener {
+            openWebPage(webView, "https://open.spotify.com/artist/6qqNVTkY8uBg9cP3Jd7DAH")
+        }
+
+        binding.btnPrimeMusic.setOnClickListener {
+            openWebPage(webView, "https://music.amazon.es/artists/B01A7UTWX8/billie-eilish")
+        }
+
+        binding.btnDeezer.setOnClickListener {
+            openWebPage(webView, "https://www.deezer.com/mx/artist/9635624")
+        }
+
+        binding.btnSoundcloud.setOnClickListener {
+            openWebPage(webView, "https://soundcloud.com/billieeilish")
+        }
+
         return root
+    }
+
+    private fun openWebPage(webView: WebView, url: String) {
+        binding.webviewContainer.visibility = View.VISIBLE // Muestra el WebView
+        webView.loadUrl(url)
     }
 
     // Función para avanzar 10 segundos
     private fun fastForward() {
         val newPosition = mediaPlayer.currentPosition + 10000 // Avanzar 10 segundos
-        mediaPlayer.seekTo(minOf(newPosition, mediaPlayer.duration))
+        mediaPlayer.seekTo(min(newPosition, mediaPlayer.duration))
     }
 
     // Función para retroceder 10 segundos
     private fun rewind() {
         val newPosition = mediaPlayer.currentPosition - 10000 // Retroceder 10 segundos
-        mediaPlayer.seekTo(maxOf(newPosition, 0))
+        mediaPlayer.seekTo(max(newPosition, 0))
     }
 
     private val updateSeekBar = object : Runnable {
         override fun run() {
-            binding.seekBar.progress = mediaPlayer.currentPosition
-            binding.seekBar.postDelayed(this, 1000)
+            if (isSeekBarUpdating) {
+                binding.seekBar.progress = mediaPlayer.currentPosition
+                binding.seekBar.postDelayed(this, 1000)
+            }
         }
     }
 
@@ -108,5 +141,6 @@ class PlayerFragment : Fragment() {
         super.onDestroyView()
         mediaPlayer.release()
         _binding = null
+        isSeekBarUpdating = false // Detener la actualización de la SeekBar
     }
 }
