@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class PlaylistViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is playlist Fragment"
+        value = "Favoritos Weekend"
     }
     val text: LiveData<String> = _text
 }
