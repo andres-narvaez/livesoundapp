@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <!-- Imagen del artista -->
+    <ImageView
+        android:id="@+id/artist_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/song_carousel1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón de reproducción en la esquina inferior izquierda de la imagen -->
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@android:drawable/ic_media_play"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@id/artist_image"
+        app:layout_constraintBottom_toBottomOf="@id/artist_image"
+        android:layout_margin="4dp" />
+
+    <!-- Nombre de la canción -->
+    <TextView
+        android:id="@+id/song_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song Name"
+        android:textColor="@color/button_grey_light"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/artist_image" />
+
+    <!-- Nombre del artista -->
+    <TextView
+        android:id="@+id/artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artist Name"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        android:layout_gravity="start"
+        app:layout_constraintTop_toBottomOf="@id/song_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

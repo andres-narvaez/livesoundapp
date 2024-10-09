@@ -9,7 +9,14 @@
         android:id="@+id/nav_home"
         android:name="com.example.livesound.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_playerFragment"
+            app:destination="@id/nav_player" />
+        <action
+            android:id="@+id/action_home_to_playListFragment"
+            app:destination="@id/nav_playlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile"
